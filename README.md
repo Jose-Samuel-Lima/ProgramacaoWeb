@@ -99,7 +99,7 @@ Cada atividade será organizada de forma independente para facilitar a compreens
 
 **José-Samuel-Lima**
 
-Estudante de graduação na área de Tecnologia da Informação.
+Estudante de bacharelado em Sistemas de Informação.
 
 ## 📄 Licença
 
