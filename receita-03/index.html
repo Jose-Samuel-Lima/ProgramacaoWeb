@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Receita JavaScript Básico</title>
+</head>
+
+<body>
+
+    <h1>Receita - JavaScript Básico</h1>
+
+    <div id="botao-container">
+        <button id="botaoCarregar">
+            Mostrar cerveja
+        </button>
+    </div>
+
+    <div id="resultado"></div>
+
+
+    <script>
+
+        function carregarDiv() {
+
+            let div = document.getElementById("resultado");
+
+            div.innerHTML = `<h2>Guinness</h2>`;
+        }
+
+
+        let botao = document.getElementById("botaoCarregar");
+
+
+        botao.addEventListener("click", carregarDiv);
+
+    </script>
+
+</body>
+
+</html>
+
