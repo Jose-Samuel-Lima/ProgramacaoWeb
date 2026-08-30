@@ -1,0 +1,64 @@
+p.verso {
+    color: blue;
+}
+
+
+p.mote {
+    color: red;
+}
+
+
+
+a.link-poeta {
+    color: blue;
+}
+
+
+a.link-poeta:hover {
+    color: red;
+}
+
+
+
+a.link-poeta:visited {
+    color: purple;
+}
+
+
+.avatar {
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+}
+
+
+div.poeta img {
+    border-radius: 50%;
+    border: 8px solid black;
+}
+
+
+
+table {
+    border-collapse: collapse;
+}
+
+
+/* Estilo da marca th */
+
+th {
+    background-color: blue;
+    color: white;
+
+    padding: 10px;
+}
+
+
+/* Estilo das células */
+
+td {
+    border: 1px solid black;
+
+    padding: 10px;
+}
