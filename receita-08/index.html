@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Promises - JavaScript</title>
+</head>
+
+<body>
+
+    <div>
+        <button id="botaoCarregar">Carregar cervejas</button>
+    </div>
+
+    <div id="cervejasDiv"></div>
+
+    <script>
+        let cervejas = []
+
+        const carregarDiv = cs => {
+            const div = document.getElementById("cervejasDiv")
+
+            const itensHtml = cs.map(
+                ({ name, alcohol }) =>
+                    `<div>${name} -- ${alcohol}</div>`
+            )
+
+            div.innerHTML = itensHtml.join("\n")
+        }
+
+        async function carregarCervejas() {
+            try {
+                let res = await fetch(
+                    "https://jsonplaceholder.typicode.com/users"
+                )
+
+                cervejas = await res.json()
+
+                carregarDiv(cervejas)
+
+            } 
+            catch (err) {
+                console.warn("Erro ao carregar os dados:", err)
+                document.getElementById("cervejasDiv").innerHTML =
+                    "Erro ao carregar os dados."
+            }
+        }
+
+        function carregarCervejas2() {
+
+            let p = fetch(
+                "https://jsonplaceholder.typicode.com/users"
+            )
+
+            p.then(chegouRespostaDoFetch)
+
+            document.getElementById("cervejasDiv").innerHTML =
+                "Fazendo requisição"
+        }
+
+        function chegouRespostaDoFetch(res) {
+            document.getElementById("cervejasDiv").innerHTML =
+                `Resposta do fetch() -- ${res}`
+        }
+
+        let botao = document.getElementById("botaoCarregar")
+
+        botao.addEventListener(
+            "click",
+            () => carregarCervejas2()
+        )
+    </script>
+
+</body>
+</html>
