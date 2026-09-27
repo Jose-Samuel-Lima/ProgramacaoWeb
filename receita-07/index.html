@@ -1,0 +1,155 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fetch e JSON</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #mensagem {
+            text-align: center;
+            margin: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Usuários da API</h1>
+
+    <button id="botaoCarregar">
+        Carregar usuários
+    </button>
+
+    <div id="mensagem"></div>
+
+    <div id="dadosDiv"></div>
+
+    <!-- Arquivo com a função genérica -->
+    <script src="tabela.js"></script>
+
+    <script>
+
+        // Array que receberá os dados da API
+        let usuarios = [];
+
+
+        // Função responsável por buscar os usuários
+        async function carregarUsuarios() {
+
+            const mensagem = document.getElementById("mensagem");
+
+            try {
+
+                mensagem.innerHTML = "Carregando dados...";
+
+                // Faz a requisição para a API
+                const resposta = await fetch(
+                    "https://jsonplaceholder.typicode.com/users"
+                );
+
+                // Verifica se a requisição deu certo
+                if (!resposta.ok) {
+                    throw new Error("Erro ao acessar a API.");
+                }
+
+                // Converte a resposta para objetos JavaScript
+                usuarios = await resposta.json();
+
+
+                // Verifica se a resposta está vazia
+                if (usuarios.length === 0) {
+
+                    mensagem.innerHTML = "Nenhum usuário encontrado.";
+
+                    return;
+                }
+
+
+                // Mostra os dados na tabela
+                carregarTabela(
+                    usuarios,
+                    "dadosDiv",
+                    ["Nome", "Usuário", "E-mail", "Cidade", "Telefone"],
+                    ["name", "username", "email", "address.city", "phone"]
+                );
+
+
+                mensagem.innerHTML =
+                    `${usuarios.length} usuários carregados com sucesso.`;
+
+            } catch (erro) {
+
+                // Trata erros
+                mensagem.innerHTML =
+                    "Não foi possível carregar os dados da API.";
+
+                console.error(erro);
+            }
+        }
+
+
+        // Localiza o botão
+        const botao = document.getElementById("botaoCarregar");
+
+
+        // Executa a função quando o botão for clicado
+        botao.addEventListener(
+            "click",
+            () => carregarUsuarios()
+        );
+
+    </script>
+
+</body>
+
+</html>
+```
