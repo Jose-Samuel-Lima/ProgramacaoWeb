@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <div>
+            <a href="#" id="botaoCarregar">Carregar sorvetes</a>
+        </div>
+
+        <div id="meu amor"></div>
+    </body>
+
+    <script>
+
+        let sorvetes = ["Chocolate", "Morango", "Flocos"]
+
+        const carregarDiv = cervs => {
+            const div = document.getElementById("meu amor")
+
+            const cervejasHtml = cervs.map(item => `<h1>${item}</h1>`)
+
+            div.innerHTML = `${cervejasHtml.join("\n")}`
+        }
+        let botao = document.getElementById("botaoCarregar")
+
+        botao.addEventListener("click", () => carregarDiv(sorvetes))
+    </script>
+</html>
