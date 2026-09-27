@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cervejas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lista de Cervejas</h1>
+
+    <button id="botaoCarregar">
+        Carregar cervejas
+    </button>
+
+    <div id="cervejasDiv"></div>
+
+    <script>
+
+        // Array de objetos
+        let cervejas = [
+            {
+                name: "Guiness",
+                alcohol: "10%",
+                style: "Imperial Stout",
+                ibu: "40"
+            },
+
+            {
+                name: "Desperados",
+                alcohol: "6%",
+                style: "Lager",
+                ibu: "25"
+            },
+
+            {
+                name: "Becks",
+                alcohol: "5%",
+                style: "Pilsen",
+                ibu: "20"
+            }
+        ];
+
+
+        /*
+         * Função genérica para carregar uma tabela.
+         *
+         * valores:
+         *   array de objetos que será exibido
+         *
+         * id:
+         *   id do elemento HTML onde a tabela será colocada
+         *
+         * cabecalhos:
+         *   nomes das colunas
+         *
+         * propriedades:
+         *   propriedades dos objetos que serão exibidas
+         */
+        const carregarDiv = (
+            valores,
+            id = "cervejasDiv",
+            cabecalhos = ["Nome", "Álcool", "Estilo", "Amargor"],
+            propriedades = ["name", "alcohol", "style", "ibu"]
+        ) => {
+
+            // Localiza o elemento HTML pelo ID
+            const div = document.getElementById(id);
+
+            // Cria os cabeçalhos da tabela
+            const cabecalhoHtml = cabecalhos
+                .map(cabecalho => `<th>${cabecalho}</th>`)
+                .join("");
+
+            // Cria as linhas da tabela
+            const linhasHtml = valores
+                .map(item => {
+
+                    const colunas = propriedades
+                        .map(propriedade => `<td>${item[propriedade]}</td>`)
+                        .join("");
+
+                    return `<tr>${colunas}</tr>`;
+                })
+                .join("\n");
+
+            // Monta a tabela completa
+            div.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            ${cabecalhoHtml}
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${linhasHtml}
+                    </tbody>
+                </table>
+            `;
+        };
+
+
+        // Localiza o botão
+        const botao = document.getElementById("botaoCarregar");
+
+
+        // Quando o botão for clicado,
+        // chama a função carregarDiv
+        botao.addEventListener(
+            "click",
+            () => carregarDiv(cervejas)
+        );
+
+    </script>
+
+</body>
+
+</html>
